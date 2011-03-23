@@ -1,17 +1,5 @@
 @serializable class HappyNumber(val get: BigInt)
-
-object HappyNumber {
-    
-    private lazy val squares = (0 until 10).map( c => ( (c + 48).toChar -> c * c ) ).toMap
-    
-    def unapply(v: BigInt) = {
-        var intermediateValues = Set(v)
-        def tailRecHappyNumber(i: BigInt): Option[BigInt] = i.toString.foldLeft(0) ( _ + squares(_) ) match {
-            case 1 => Some(v)
-            case n if intermediateValues.contains(n) => None
-            case n => intermediateValues += n; tailRecHappyNumber(n)
-        }
-        tailRecHappyNumber(v)
-    }
+object HappyNumber {    
+    def unapply(v: BigInt) = {var i=v;var s=Set[BigInt]();while(i!=1&& !s(i)){s+=i;i=(""+i).map(a=>(a+"").toInt).map(n=>n*n).sum};if(i==1)Some(v)else None}
     def apply(i: BigInt) = new HappyNumber(i)
 }
