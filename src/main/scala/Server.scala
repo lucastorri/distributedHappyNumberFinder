@@ -12,7 +12,7 @@ object NumberServer {
         loop {
             receive {
                 case 'next => reply(nextTry); nextTry += 1
-                case h: HappyNumber => println(h.get); foundNums += h.get
+                case HappyNumber(n) => println(n); foundNums += n
             }
         }
     }

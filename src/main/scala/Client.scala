@@ -8,7 +8,7 @@ object NumberMatcherClient {
         val server = select(Node(args(0), 9010), 'happynumserver)
         loop {
             server !? 'next match {
-                case HappyNumber(a: BigInt) => server ! HappyNumber(a)
+                case IsAHappyNumber(a: BigInt) => server ! HappyNumber(a)
                 case _ => None
             }
         }
